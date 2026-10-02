@@ -1,0 +1,809 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Haven | Find a Friend</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ["Georgia", "serif"],
+            sans: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #fbf7f1;
+      color: #3f3027;
+    }
+
+    .pet-card {
+      transition: 0.3s ease;
+    }
+
+    .pet-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(68, 48, 35, 0.13);
+    }
+
+    .pet-image {
+      transition: 0.4s ease;
+    }
+
+    .pet-card:hover .pet-image {
+      transform: scale(1.06);
+    }
+
+    .filter-btn.active {
+      background: #3f3027;
+      color: white;
+    }
+
+    .modal-bg {
+      background: rgba(37, 27, 21, 0.65);
+    }
+  </style>
+</head>
+
+<body class="font-sans">
+
+<!-- NAVBAR -->
+<header class="sticky top-0 z-40 bg-[#fbf7f1]/95 backdrop-blur border-b border-[#e9ddd0]">
+  <nav class="max-w-7xl mx-auto px-5 lg:px-8 h-20 flex items-center justify-between">
+
+    <a href="#" class="flex items-center gap-3">
+      <span class="w-11 h-11 rounded-2xl bg-[#d98b62] text-white grid place-items-center text-xl">
+        🐾
+      </span>
+
+      <div>
+        <h1 class="font-display text-2xl font-bold leading-none">
+          Pet Haven
+        </h1>
+
+        <p class="text-[10px] tracking-[.25em] uppercase text-[#8d7666] mt-1">
+          Find a friend
+        </p>
+      </div>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <a href="#pets" class="hover:text-[#c76f46]">
+        Find a Pet
+      </a>
+
+      <a href="#process" class="hover:text-[#c76f46]">
+        How It Works
+      </a>
+
+      <a href="#stories" class="hover:text-[#c76f46]">
+        Happy Stories
+      </a>
+    </div>
+
+    <a href="#contact"
+       class="hidden sm:inline-flex bg-[#3f3027] text-white px-5 py-3 rounded-full text-sm hover:bg-[#5a4437] transition">
+      Start an Adoption
+    </a>
+
+  </nav>
+</header>
+
+
+<!-- HERO -->
+<section class="max-w-7xl mx-auto px-5 lg:px-8 pt-10 pb-16">
+
+  <div class="rounded-[2rem] overflow-hidden bg-[#ead9c8] min-h-[560px] grid lg:grid-cols-2">
+
+    <div class="p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
+
+      <span class="inline-flex w-fit px-4 py-2 rounded-full bg-white/70 text-[#9b6042] text-xs font-bold tracking-wider uppercase mb-6">
+        A little love goes a long way
+      </span>
+
+      <h2 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[.98] max-w-xl">
+        Your next
+        <span class="text-[#c76f46]">
+          best friend
+        </span>
+        is waiting.
+      </h2>
+
+      <p class="text-[#705b4d] text-lg leading-8 max-w-lg mt-6">
+        Meet gentle souls looking for a safe home, a warm bed,
+        and someone to call their own.
+      </p>
+
+      <div class="flex flex-wrap gap-3 mt-8">
+
+        <a href="#pets"
+           class="bg-[#3f3027] text-white px-6 py-3.5 rounded-full font-semibold hover:bg-[#5a4437] transition">
+          Meet the pets →
+        </a>
+
+        <a href="#process"
+           class="bg-white text-[#3f3027] px-6 py-3.5 rounded-full font-semibold">
+          How adoption works
+        </a>
+
+      </div>
+
+      <div class="flex gap-8 mt-10 pt-7 border-t border-[#d3bdaa] max-w-lg">
+
+        <div>
+          <p class="text-2xl font-bold">120+</p>
+          <p class="text-sm text-[#806b5c]">
+            Pets adopted
+          </p>
+        </div>
+
+        <div>
+          <p class="text-2xl font-bold">38</p>
+          <p class="text-sm text-[#806b5c]">
+            Waiting today
+          </p>
+        </div>
+
+        <div>
+          <p class="text-2xl font-bold">4.9/5</p>
+          <p class="text-sm text-[#806b5c]">
+            Family rating
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="relative min-h-[360px] lg:min-h-full">
+
+      <img
+        src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1100&q=85"
+        class="absolute inset-0 w-full h-full object-cover"
+        alt="Happy dog">
+
+      <div class="absolute bottom-7 right-7 bg-white/90 backdrop-blur rounded-2xl p-4 shadow-lg">
+        <p class="text-xs uppercase tracking-widest text-[#a16b51] font-bold">
+          Featured friend
+        </p>
+
+        <p class="font-display text-2xl font-bold mt-1">
+          Milo
+        </p>
+
+        <p class="text-sm text-[#79675b]">
+          2 years • Golden Retriever
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- PET SECTION -->
+<section id="pets" class="max-w-7xl mx-auto px-5 lg:px-8 py-16">
+
+  <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+
+    <div>
+      <p class="text-[#c76f46] uppercase tracking-[.2em] text-xs font-bold">
+        Meet your match
+      </p>
+
+      <h2 class="font-display text-4xl sm:text-5xl font-bold mt-2">
+        Pets looking for home
+      </h2>
+
+      <p class="text-[#806d60] mt-3">
+        Every profile has a personality.
+        Take your time finding yours.
+      </p>
+    </div>
+
+
+    <div class="relative w-full lg:w-80">
+
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search by pet name..."
+        class="w-full bg-white border border-[#e4d8cc] rounded-full px-5 py-3.5 outline-none focus:border-[#c76f46]">
+
+    </div>
+
+  </div>
+
+
+  <!-- FILTERS -->
+  <div class="flex flex-wrap gap-2 mb-9">
+
+    <button
+      class="filter-btn active px-5 py-2.5 rounded-full border border-[#3f3027]"
+      data-filter="all">
+      All Pets
+    </button>
+
+    <button
+      class="filter-btn px-5 py-2.5 rounded-full border border-[#d9cbbf]"
+      data-filter="Dog">
+      Dogs
+    </button>
+
+    <button
+      class="filter-btn px-5 py-2.5 rounded-full border border-[#d9cbbf]"
+      data-filter="Cat">
+      Cats
+    </button>
+
+    <button
+      class="filter-btn px-5 py-2.5 rounded-full border border-[#d9cbbf]"
+      data-filter="Rabbit">
+      Rabbits
+    </button>
+
+  </div>
+
+
+  <!-- PET CARDS -->
+  <div
+    id="petGrid"
+    class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+  </div>
+
+  <p
+    id="noResults"
+    class="hidden text-center py-16 text-[#806d60]">
+    No pets found.
+  </p>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section id="process" class="bg-[#3f3027] text-white">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-20">
+
+    <p class="text-[#e9ae8d] uppercase tracking-[.2em] text-xs font-bold">
+      Simple & caring
+    </p>
+
+    <h2 class="font-display text-4xl sm:text-5xl font-bold mt-3">
+      Adoption made simple.
+    </h2>
+
+    <p class="text-[#d8c8bc] mt-4 max-w-xl leading-7">
+      A few thoughtful steps help us make sure
+      every pet finds the right forever home.
+    </p>
+
+
+    <div class="grid md:grid-cols-4 gap-5 mt-12">
+
+      <div class="border border-white/15 rounded-3xl p-7">
+        <span class="text-[#e9ae8d] text-3xl">01</span>
+        <h3 class="font-bold text-xl mt-6">
+          Browse
+        </h3>
+        <p class="text-[#cbb9ac] text-sm leading-6 mt-2">
+          Explore profiles and find a personality that feels right.
+        </p>
+      </div>
+
+
+      <div class="border border-white/15 rounded-3xl p-7">
+        <span class="text-[#e9ae8d] text-3xl">02</span>
+        <h3 class="font-bold text-xl mt-6">
+          Connect
+        </h3>
+        <p class="text-[#cbb9ac] text-sm leading-6 mt-2">
+          Send us a simple adoption request with your details.
+        </p>
+      </div>
+
+
+      <div class="border border-white/15 rounded-3xl p-7">
+        <span class="text-[#e9ae8d] text-3xl">03</span>
+        <h3 class="font-bold text-xl mt-6">
+          Meet
+        </h3>
+        <p class="text-[#cbb9ac] text-sm leading-6 mt-2">
+          Meet your chosen pet and spend some time together.
+        </p>
+      </div>
+
+
+      <div class="border border-white/15 rounded-3xl p-7">
+        <span class="text-[#e9ae8d] text-3xl">04</span>
+        <h3 class="font-bold text-xl mt-6">
+          Go Home
+        </h3>
+        <p class="text-[#cbb9ac] text-sm leading-6 mt-2">
+          Get ready for a new chapter filled with companionship.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- STORY -->
+<section id="stories" class="max-w-7xl mx-auto px-5 lg:px-8 py-20">
+
+  <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+    <div>
+
+      <p class="text-[#c76f46] uppercase tracking-[.2em] text-xs font-bold">
+        A forever kind of feeling
+      </p>
+
+      <h2 class="font-display text-4xl sm:text-5xl font-bold mt-3">
+        Every adoption starts with one small “hello.”
+      </h2>
+
+      <p class="text-[#806d60] leading-8 mt-5">
+        We believe adoption should feel personal, calm, and honest.
+        Our goal is not simply to place pets in homes, but to create
+        relationships that last.
+      </p>
+
+    </div>
+
+
+    <div class="bg-[#ead9c8] rounded-[2rem] p-4">
+
+      <img
+        src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=1000&q=85"
+        class="w-full h-[430px] object-cover rounded-[1.5rem]"
+        alt="Happy pets">
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact" class="max-w-7xl mx-auto px-5 lg:px-8 pb-20">
+
+  <div class="rounded-[2rem] bg-[#e8cbb8] p-8 sm:p-12 lg:p-16 grid lg:grid-cols-2 gap-10">
+
+    <div>
+
+      <p class="text-[#9b6042] uppercase tracking-[.2em] text-xs font-bold">
+        Ready to meet?
+      </p>
+
+      <h2 class="font-display text-4xl sm:text-5xl font-bold mt-3">
+        Someone out there is waiting for you.
+      </h2>
+
+      <p class="text-[#705b4d] mt-4 leading-7">
+        Tell us a little about yourself and the kind of
+        companion you're looking for.
+      </p>
+
+    </div>
+
+
+    <form
+      id="adoptionForm"
+      class="bg-white rounded-3xl p-6 sm:p-8 shadow-lg">
+
+      <input
+        required
+        type="text"
+        placeholder="Your name"
+        class="w-full border-b border-[#ddd0c4] py-3 outline-none">
+
+      <input
+        required
+        type="email"
+        placeholder="Email address"
+        class="w-full border-b border-[#ddd0c4] py-3 outline-none">
+
+      <select
+        required
+        class="w-full border-b border-[#ddd0c4] py-3 outline-none bg-white">
+
+        <option value="">
+          Pet type you're interested in
+        </option>
+
+        <option>Dog</option>
+        <option>Cat</option>
+        <option>Rabbit</option>
+
+      </select>
+
+      <button
+        class="w-full mt-6 bg-[#3f3027] text-white py-3.5 rounded-full font-semibold">
+        Send Adoption Request
+      </button>
+
+      <p
+        id="formMessage"
+        class="hidden text-center text-sm text-[#7b654f] mt-4">
+        Thanks! We'll get in touch soon.
+      </p>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer class="border-t border-[#e4d8cc]">
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-8 flex flex-col sm:flex-row justify-between gap-4 text-sm text-[#806d60]">
+
+    <p>
+      © 2026 Pet Haven. Made with care for every paw.
+    </p>
+
+    <p>
+      Adopt • Love • Belong
+    </p>
+
+  </div>
+
+</footer>
+
+
+<!-- PET MODAL -->
+<div
+  id="petModal"
+  class="fixed inset-0 z-50 hidden modal-bg items-center justify-center p-5">
+
+  <div class="bg-[#fbf7f1] rounded-[2rem] max-w-lg w-full overflow-hidden shadow-2xl">
+
+    <div class="relative">
+
+      <img
+        id="modalImage"
+        class="w-full h-64 object-cover"
+        alt="">
+
+      <button
+        id="closeModal"
+        class="absolute top-4 right-4 bg-white w-10 h-10 rounded-full shadow">
+        ✕
+      </button>
+
+    </div>
+
+
+    <div class="p-7">
+
+      <p
+        id="modalType"
+        class="text-[#c76f46] text-xs uppercase tracking-widest font-bold">
+      </p>
+
+      <h3
+        id="modalName"
+        class="font-display text-4xl font-bold mt-1">
+      </h3>
+
+      <p
+        id="modalDetails"
+        class="text-[#806d60] mt-2">
+      </p>
+
+      <p
+        id="modalBio"
+        class="leading-7 text-[#604f43] mt-5">
+      </p>
+
+      <button
+        onclick="closeAndScroll()"
+        class="mt-6 w-full bg-[#3f3027] text-white py-3.5 rounded-full font-semibold">
+        I Want To Meet This Pet
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const pets = [
+
+  {
+    name: "Milo",
+    type: "Dog",
+    age: "2 years",
+    breed: "Golden Retriever",
+    location: "Adyar",
+    image: "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=800&q=85",
+    bio: "Milo is a cheerful, people-loving dog who enjoys walks, gentle play, and being around his favorite humans."
+  },
+
+  {
+    name: "Luna",
+    type: "Cat",
+    age: "1 year",
+    breed: "Domestic Shorthair",
+    location: "Anna Nagar",
+    image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=800&q=85",
+    bio: "Luna is curious and affectionate. She loves sunny windows, quiet corners, and a good afternoon nap."
+  },
+
+  {
+    name: "Ollie",
+    type: "Rabbit",
+    age: "8 months",
+    breed: "Mini Lop",
+    location: "Velachery",
+    image: "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=800&q=85",
+    bio: "Ollie is a gentle little rabbit who loves fresh greens, exploring safe spaces, and calm companionship."
+  },
+
+  {
+    name: "Bruno",
+    type: "Dog",
+    age: "3 years",
+    breed: "Indie Mix",
+    location: "T Nagar",
+    image: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=85",
+    bio: "Bruno is loyal and playful. He would love a family that enjoys outdoor time and lots of cuddles."
+  },
+
+  {
+    name: "Nala",
+    type: "Cat",
+    age: "2 years",
+    breed: "Tabby",
+    location: "Mylapore",
+    image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=85",
+    bio: "Nala is a calm tabby with a playful side. She warms up quickly when treats and gentle attention are involved."
+  },
+
+  {
+    name: "Coco",
+    type: "Rabbit",
+    age: "1 year",
+    breed: "Lionhead",
+    location: "Besant Nagar",
+    image: "https://images.unsplash.com/photo-1535241749838-299277b6305f?auto=format&fit=crop&w=800&q=85",
+    bio: "Coco is sweet and energetic. She enjoys exploring, hopping around, and relaxing beside her favorite person."
+  }
+
+];
+
+
+const grid = document.getElementById("petGrid");
+const searchInput = document.getElementById("searchInput");
+const noResults = document.getElementById("noResults");
+
+let activeFilter = "all";
+
+
+function renderPets() {
+
+  const query = searchInput.value.toLowerCase().trim();
+
+  const filtered = pets.filter(pet =>
+
+    (activeFilter === "all" ||
+     pet.type === activeFilter)
+
+    &&
+
+    (
+      pet.name.toLowerCase().includes(query) ||
+      pet.breed.toLowerCase().includes(query) ||
+      pet.location.toLowerCase().includes(query)
+    )
+
+  );
+
+
+  grid.innerHTML = filtered.map(pet => `
+
+    <article class="pet-card bg-white rounded-[1.5rem] overflow-hidden border border-[#eadfd5]">
+
+      <div class="relative overflow-hidden h-72">
+
+        <img
+          src="${pet.image}"
+          alt="${pet.name}"
+          class="pet-image w-full h-full object-cover">
+
+        <span class="absolute top-4 left-4 bg-white/90 px-3 py-1.5 rounded-full text-xs font-bold">
+          ${pet.type}
+        </span>
+
+      </div>
+
+
+      <div class="p-5">
+
+        <div class="flex justify-between">
+
+          <div>
+
+            <h3 class="font-display text-3xl font-bold">
+              ${pet.name}
+            </h3>
+
+            <p class="text-sm text-[#806d60] mt-1">
+              ${pet.age} • ${pet.breed}
+            </p>
+
+          </div>
+
+          <span class="text-[#c76f46] text-xl">
+            ♡
+          </span>
+
+        </div>
+
+
+        <p class="text-sm text-[#806d60] mt-5">
+          📍 ${pet.location}, Chennai
+        </p>
+
+
+        <button
+          onclick="openPet(${pets.indexOf(pet)})"
+          class="w-full mt-5 border border-[#d8c9bc] rounded-full py-3 font-semibold text-sm hover:bg-[#3f3027] hover:text-white transition">
+
+          Meet ${pet.name}
+
+        </button>
+
+      </div>
+
+    </article>
+
+  `).join("");
+
+
+  noResults.classList.toggle(
+    "hidden",
+    filtered.length !== 0
+  );
+
+}
+
+
+document.querySelectorAll(".filter-btn").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document
+      .querySelectorAll(".filter-btn")
+      .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    activeFilter = button.dataset.filter;
+
+    renderPets();
+
+  });
+
+});
+
+
+searchInput.addEventListener(
+  "input",
+  renderPets
+);
+
+
+function openPet(index) {
+
+  const pet = pets[index];
+
+  document.getElementById("modalImage").src = pet.image;
+
+  document.getElementById("modalName").textContent = pet.name;
+
+  document.getElementById("modalType").textContent = pet.type;
+
+  document.getElementById("modalDetails").textContent =
+    `${pet.age} • ${pet.breed} • ${pet.location}, Chennai`;
+
+  document.getElementById("modalBio").textContent =
+    pet.bio;
+
+  document
+    .getElementById("petModal")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("petModal")
+    .classList.add("flex");
+
+}
+
+
+function closeModal() {
+
+  document
+    .getElementById("petModal")
+    .classList.add("hidden");
+
+  document
+    .getElementById("petModal")
+    .classList.remove("flex");
+
+}
+
+
+document
+  .getElementById("closeModal")
+  .addEventListener("click", closeModal);
+
+
+document
+  .getElementById("petModal")
+  .addEventListener("click", event => {
+
+    if (event.target.id === "petModal") {
+      closeModal();
+    }
+
+  });
+
+
+function closeAndScroll() {
+
+  closeModal();
+
+  document
+    .getElementById("contact")
+    .scrollIntoView();
+
+}
+
+
+document
+  .getElementById("adoptionForm")
+  .addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    document
+      .getElementById("formMessage")
+      .classList.remove("hidden");
+
+    event.target.reset();
+
+  });
+
+
+renderPets();
+
+</script>
+
+</body>
+</html>
+
